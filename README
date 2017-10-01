@@ -16,23 +16,3 @@ Objective
 * Learning UNIX/Linux system memory management
 * Learning UNIX/Linux kernel modules
 * Learning multiprocess programming
-
-How to start 
-
-To begin, you need to first form a group and setup the environment for developing your project. You should set up a machine or a VMWare virtual machine (CS students should have free license for that) with clean Ubuntu 16.04 installation. You also may use the VCL service maintained by NCSU through https://vcl.ncsu.edu/ . You may reserve one virtual machine and connect to this machine remotely by selecting reservations. We will use the "Ubuntu 16.04 Base" to test your kernel module. However, the VCL service will reset once your reservation timeout. 
-
-Then, you may fetch the code from https://github.ncsu.edu/htseng3/CSC501_NPHeap.git.  After fetching the code, you will find three directories and a test script. These directories are:
-
-1. kernel_module -- the directory where we have the kernel module code.
-
-2. library -- the directory of the user-space library code.
-
-3. benchmark -- the directory with a sample program using this kernel and a validator to examine the result.
-
-You may now go to the kernel_module directory and type "make" to compile the kernel module and then "sudo make install" to install headers and the module in the right place. You should be able to find an npheap.ko if your compilation success and this is the binary of the npheap kernel module. However, this kernel module isn't in your kernel yet. To get this kernel module loaded into the system kernel, try "sudo insmod npheap.ko". Upon success, you should find an "npheap" device file under /dev directory in your linux system. By default, this device may not be available for non-root users. Therefore, you need to use "sudo chmod 777 /dev/npheap" command to make it accessible by anyone and any process in the system. If you don't want this device to be available in the system anymore, you can use "sudo rmmod npheap" to remove this device.
-
-Now, you can navigate to the library path and again use "make" to generate this dynamic link library. You need to then use "sudo make install" to make this library publicly available for the system. You should read the code and figure out how this library interacts with the kernel module. 
-
-Finally, you can now go to the benchmark directory to get the benchmark and validate programs compiled. You may use the test.sh to have a trial run of the whole framework.
-
-No matter you're using VMWare, real machine, or VCL, you should always use https://github.ncsu.edu to control/maintain/backup your work.
